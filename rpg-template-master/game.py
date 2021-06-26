@@ -3,6 +3,7 @@ from pygame import *
 from game_platform import *
 from player import Player
 
+
 WIN_WIDTH = 800  # ancho ventana
 WIN_HEIGHT = 640  # alto de ventana
 DISPLAY = (WIN_WIDTH, WIN_HEIGHT)  # setea las dimensiones del display

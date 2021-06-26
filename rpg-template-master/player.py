@@ -4,6 +4,12 @@
 from pygame import *
 from pygame.transform import scale
 import game_platform
+from tkinter import *
+from tkinter import messagebox as MessageBox
+
+
+# Comenzamos el bucle de aplicación, es como un while True
+#Raiz
 
 
 MOVE_SPEED = 7
@@ -49,6 +55,13 @@ class Player(sprite.Sprite):
             self.mensaje = (f"bienvenido al mercado de Oscar")
             image.set_alpha(100)   
             text.set_alpha(200)
+            root = Tk()
+            root.title("Misiones")
+            Label(root, text="Puntos = 100").pack(anchor=CENTER)
+            Button(root, text="Aceptar", command=root.destroy).pack(pady=10, side=LEFT)
+            Button(root, text="Rechazar").pack(side=RIGHT)
+            Label(root, text=f"Sube una historia a instagram etiquetando @exquisiteces_de_Oscar").pack()
+            root.mainloop()
         if sprite.collide_rect(self, edi2):
             self.mensaje = (f"bienvenido a la granja de la marta")
             image.set_alpha(100)   
