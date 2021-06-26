@@ -9,7 +9,7 @@ DISPLAY = (WIN_WIDTH, WIN_HEIGHT)  # setea las dimensiones del display
 BACKGROUND_COLOR = "#004400"
 
 
-# configuracion de camara
+# configuracion de
 class Camera(object):
     def __init__(self, camera_func, width, height):
         self.camera_func = camera_func
@@ -59,30 +59,28 @@ def main():
 
     # карта
     level = [
-        "----------------------------------",
-        "-    s               s           -",
-        "-      c  s     c       --       -",
-        "-    s  w                c       -",
-        "-            --                  -",
-        "-      c  w        s             -",
-        "--            w        c         -",
-        "-  s       s                     -",
-        "-                   ----     --- -",
-        "-    w    s    -----             -",
-        "--                 -----         -",
-        "-       c       c                -",
-        "-  c                         --- -",
-        "-            s                   -",
-        "-                    c           -",
-        "-      ---                       -",
-        "-      -----                     -",
-        "-   -------         ----         -",
-        "-                                -",
-        "-                         -      -",
-        "-           c                --  -",
-        "-                                -",
-        "-                                -",
-        "----------------------------------"]
+        "---------------------------",
+        "-    s               s    -",
+        "-      c  s     c       ---",
+        "-    s                   c-",
+        "-                         -",
+        "-      c           s      -",
+        "--                     c  -",
+        "-  s       s              -",
+        "-                         -",
+        "-         s e             -",
+        "--                        -",
+        "-       c       c         -",
+        "-  c                      -",
+        "-            s            -",
+        "-                    c    -",
+        "-                         -",
+        "-                         -",
+        "-                         -",
+        "-  cc                     -",
+        "-                         -",
+        "-           c             -",
+        "---------------------------"]
 
     # добавляем объекты с карты в список
     x = 0
@@ -95,6 +93,9 @@ def main():
                 platforms.add(pf)
             if col == "s":
                 entities.add(Stone(x, y))
+            if col == "e":
+                entities.add(edi(x, y))
+                platforms.add(edi(x, y))
             if col == "w":
                 water = Water(x, y)
                 entities.add(water)
@@ -154,10 +155,12 @@ def main():
             screen.blit(e.image, camera.apply(e))
 
         # рисуем надпись
-        textsurface = myfont.render(f'Coins: {hero.coins_count}', False, (255, 255, 255))
+        textsurface = myfont.render(f'Coins: {hero.coins_count} {hero.mensaje}', False, (255, 255, 255))
+        textsurface2 = myfont.render(f'mensaje: {hero.mensaje}', False, (255, 255, 255))
         screen.blit(textsurface, (20, 20))
-
+        screen.blit(textsurface2, (500,600))
         pygame.display.update()
+        
 
 
 if __name__ == "__main__":

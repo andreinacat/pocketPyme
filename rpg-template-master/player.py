@@ -12,10 +12,10 @@ HEIGHT = 52
 class Player(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)
-
+        self.mensaje = " "
         # монеты
         self.coins_count = 0
-
+        
         # скорость
         self.xvel = 0
         self.yvel = 0
@@ -28,7 +28,7 @@ class Player(sprite.Sprite):
         for t in ['up', 'down', 'left', 'right']:
             self.images[t] = []
             for i in range(3):
-                self.images[t].append(scale(image.load(f"images/player/{t}{i}.png"), (32, 52)))
+                self.images[t].append(scale(image.load(f"/home/andreacat/pocketPyme/rpg-template-master/images/player/{t}{i}.png"), (32, 52)))
 
         # текущая картинки
         self.index = 0
@@ -40,6 +40,8 @@ class Player(sprite.Sprite):
             if sprite.collide_rect(self, coin):
                 coin.kill()
                 self.coins_count += 1
+                self.mensaje = (f"mision pyme {self.coins_count}")
+                
 
         # изменяем скорость в зависимости от нажатых клавиш и выбираем картинку
         if up:
