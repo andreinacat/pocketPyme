@@ -3,6 +3,8 @@
 
 from pygame import *
 from pygame.transform import scale
+import game_platform
+
 
 MOVE_SPEED = 7
 WIDTH = 32
@@ -34,14 +36,33 @@ class Player(sprite.Sprite):
         self.index = 0
         self.image = self.images['down'][1]
 
-    def update(self, left, right, up, down, platforms, coins):
+    def update(self, left, right, up, down, platforms, coins , edi1 , edi2, edi3, edi4 ,image ,text):
         # если персонаж пересекается с монеткой
+        
         for coin in coins:
             if sprite.collide_rect(self, coin):
                 coin.kill()
                 self.coins_count += 1
                 self.mensaje = (f"mision pyme {self.coins_count}")
-                
+        
+        if sprite.collide_rect(self, edi1):
+            self.mensaje = (f"bienvenido al mercado de Oscar")
+            image.set_alpha(100)   
+            text.set_alpha(200)
+        if sprite.collide_rect(self, edi2):
+            self.mensaje = (f"bienvenido a la granja de la marta")
+            image.set_alpha(100)   
+            text.set_alpha(200)
+        if sprite.collide_rect(self, edi3):
+            self.mensaje = (f"Hola soy lucia vendo sandwich¡¡¡")
+            image.set_alpha(100)   
+            text.set_alpha(200)
+        if sprite.collide_rect(self, edi4):
+            self.mensaje = (f"Aqui no vendemos nada")
+            image.set_alpha(100)   
+            text.set_alpha(200)
+       
+
 
         # изменяем скорость в зависимости от нажатых клавиш и выбираем картинку
         if up:

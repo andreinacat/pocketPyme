@@ -1,6 +1,8 @@
 from pygame import *
 from random import choice
+from player import Player
 
+personaje = Player
 PLATFORM_WIDTH = 52
 PLATFORM_HEIGHT = 52
 PLATFORM_COLOR = "#FF6262"
@@ -42,8 +44,32 @@ class Coin(sprite.Sprite):
         self.rect = Rect(x, y, self.image.get_width(), self.image.get_height())
 
 
-class edi(sprite.Sprite):
+class edi1(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)
         self.image = image.load("/home/andreacat/pocketPyme/rpg-template-master/images/pngs/edificio1.png")
         self.rect = Rect(x, y, self.image.get_width(), self.image.get_height())
+        
+class edi2(sprite.Sprite):
+    def __init__(self, x, y):
+        sprite.Sprite.__init__(self)
+        self.image = image.load("/home/andreacat/pocketPyme/rpg-template-master/images/pngs/Capa 5.png")
+        self.rect = Rect(x, y, self.image.get_width(), self.image.get_height())
+class edi3(sprite.Sprite):
+    def __init__(self, x, y):
+        sprite.Sprite.__init__(self)
+        self.image = image.load("/home/andreacat/pocketPyme/rpg-template-master/images/pngs/Capa 4.png")
+        self.rect = Rect(x, y, self.image.get_width(), self.image.get_height())
+class edi4(sprite.Sprite):
+    def __init__(self, x, y):
+        sprite.Sprite.__init__(self)
+        self.image = image.load("/home/andreacat/pocketPyme/rpg-template-master/images/pngs/Capa 2.png")
+        self.rect = Rect(x, y, self.image.get_width(), self.image.get_height())
+
+
+class board(sprite.Sprite):
+    def __init__(self, x, y):
+        sprite.Sprite.__init__(self)
+        self.image = image.load("/home/andreacat/pocketPyme/rpg-template-master/images/pngs/board.png")
+        self.rect = Rect(x, y, self.image.get_width(), self.image.get_height())
+

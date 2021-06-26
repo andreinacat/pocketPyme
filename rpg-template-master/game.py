@@ -39,7 +39,8 @@ def main():
     init()
     screen = pygame.display.set_mode(DISPLAY)
     pygame.display.set_caption("RPG")
-
+    my_image = pygame.image.load("/home/andreacat/pocketPyme/rpg-template-master/images/pngs/cosoporfa.png").convert_alpha()
+    
     bg = Ground(0, 0)
     timer = pygame.time.Clock()
     hero = Player(155, 155)
@@ -50,36 +51,37 @@ def main():
     entities = pygame.sprite.Group()  # Все объекты
     platforms = pygame.sprite.Group()  # то, во что мы будем врезаться или опираться
     coins = pygame.sprite.Group()  # монеты
-
+    
     # добавляем в фон в список объектов для рисования
     entities.add(bg)
 
     pygame.font.init()
-    myfont = pygame.font.SysFont('Comic Sans MS', 30)
+    myfont = pygame.font.SysFont('Comic Sans MS', 27)
 
     # карта
     level = [
         "---------------------------",
         "-    s               s    -",
-        "-      c  s     c       ---",
+        "-      c  s     i       ---",
         "-    s                   c-",
         "-                         -",
         "-      c           s      -",
         "--                     c  -",
         "-  s       s              -",
         "-                         -",
-        "-         s e             -",
+        "-         s     e         -",
         "--                        -",
         "-       c       c         -",
-        "-  c                      -",
+        "-  a                      -",
         "-            s            -",
         "-                    c    -",
         "-                         -",
         "-                         -",
         "-                         -",
-        "-  cc                     -",
+        "-  c o                    -",
         "-                         -",
         "-           c             -",
+        "-                         -",
         "---------------------------"]
 
     # добавляем объекты с карты в список
@@ -93,9 +95,6 @@ def main():
                 platforms.add(pf)
             if col == "s":
                 entities.add(Stone(x, y))
-            if col == "e":
-                entities.add(edi(x, y))
-                platforms.add(edi(x, y))
             if col == "w":
                 water = Water(x, y)
                 entities.add(water)
@@ -104,6 +103,29 @@ def main():
                 coin = Coin(x, y)
                 entities.add(coin)
                 coins.add(coin)
+            if col == "e":
+                ed1 = edi1(x,y)
+                entities.add(ed1)
+                platforms.add(edi1(x, y))
+            if col == "a":
+                ed2 = edi2(x,y)
+                entities.add(ed2)
+                platforms.add(edi2(x, y))
+            if col == "i":
+                ed3 = edi3(x,y)
+                entities.add(ed3)
+                platforms.add(edi3(x, y))
+            if col == "o":
+                ed4 = edi4(x,y)
+                entities.add(ed4)
+                platforms.add(edi4(x, y))
+            #if col == "b":
+            #    bd = board(x,y)
+            #    entities.add(bd)
+            #    bd.image.set_alpha(255)
+                
+
+                
 
             x += PLATFORM_WIDTH  # блоки платформы ставятся на ширине блоков
         y += PLATFORM_HEIGHT  # то же самое и с высотой
@@ -147,18 +169,26 @@ def main():
 
         # обновляем камеру относительно героя
         camera.update(hero)
+        my_image.set_alpha(0)
+        
         # обновляем позицию персонажа
-        hero.update(left, right, up, down, platforms, coins)
+        
 
         # рисуем все объекты на карте с учетом смещения камеры
         for e in entities:
             screen.blit(e.image, camera.apply(e))
 
         # рисуем надпись
-        textsurface = myfont.render(f'Coins: {hero.coins_count} {hero.mensaje}', False, (255, 255, 255))
-        textsurface2 = myfont.render(f'mensaje: {hero.mensaje}', False, (255, 255, 255))
+        textsurface = myfont.render(f'Coins: {hero.coins_count}', False, (255, 255, 255))
+        textsurface2 = myfont.render(f'{hero.mensaje}', False, (255, 255, 255))
+        textsurface2.set_alpha(0)
+
+        hero.update(left, right, up, down, platforms, coins ,ed1 ,ed2 ,ed3 ,ed4, my_image ,textsurface2)
         screen.blit(textsurface, (20, 20))
-        screen.blit(textsurface2, (500,600))
+        screen.blit(textsurface2, (240,500))
+        screen.blit(my_image,(200,460))
+
+        
         pygame.display.update()
         
 
