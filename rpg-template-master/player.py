@@ -16,13 +16,13 @@ MOVE_SPEED = 7
 WIDTH = 32
 HEIGHT = 52
 
-
 class Player(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)
         self.mensaje = " "
         # монеты
         self.coins_count = 0
+        
         
         # скорость
         self.xvel = 0
@@ -42,7 +42,7 @@ class Player(sprite.Sprite):
         self.index = 0
         self.image = self.images['down'][1]
 
-    def update(self, left, right, up, down, platforms, coins , edi1 , edi2, edi3, edi4 ,image ,text):
+    def update(self, left, right, up, down, platforms, coins , edi1 , edi2, edi3, edi4 ,image ,text ,bandera):
         # если персонаж пересекается с монеткой
         
         for coin in coins:
@@ -55,13 +55,15 @@ class Player(sprite.Sprite):
             self.mensaje = (f"bienvenido al mercado de Oscar")
             image.set_alpha(100)   
             text.set_alpha(200)
-            root = Tk()
-            root.title("Misiones")
-            Label(root, text="Puntos = 100").pack(anchor=CENTER)
-            Button(root, text="Aceptar", command=root.destroy).pack(pady=10, side=LEFT)
-            Button(root, text="Rechazar").pack(side=RIGHT)
-            Label(root, text=f"Sube una historia a instagram etiquetando @exquisiteces_de_Oscar").pack()
-            root.mainloop()
+            if bandera==True:
+                bandera =False
+                root = Tk()
+                root.title("Misiones")
+                Label(root, text="Puntos = 100").pack(anchor=CENTER)
+                Button(root, text="Aceptar", command=root.destroy).pack(pady=10, side=LEFT)
+                Button(root, text="Rechazar").pack(side=RIGHT)
+                Label(root, text=f"Sube una historia a instagram etiquetando @exquisiteces_de_Oscar").pack()
+                root.mainloop()
         if sprite.collide_rect(self, edi2):
             self.mensaje = (f"bienvenido a la granja de la marta")
             image.set_alpha(100)   
@@ -78,6 +80,7 @@ class Player(sprite.Sprite):
 
 
         # изменяем скорость в зависимости от нажатых клавиш и выбираем картинку
+        
         if up:
             self.yvel = -MOVE_SPEED
             self.image = self.images['up'][self.index]

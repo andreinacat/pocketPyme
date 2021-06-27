@@ -46,9 +46,10 @@ def main():
     timer = pygame.time.Clock()
     hero = Player(155, 155)
     left = right = up = down = False
-
+    
     coins_count = 0
 
+    bandera = True
     entities = pygame.sprite.Group()  # Все объекты
     platforms = pygame.sprite.Group()  # то, во что мы будем врезаться или опираться
     coins = pygame.sprite.Group()  # монеты
@@ -167,6 +168,12 @@ def main():
 
             if e.type == QUIT:
                 raise SystemExit("QUIT")
+            
+            if e.type == KEYDOWN and e.key == K_SPACE:
+                if bandera==False:
+                    bandera=True
+                elif bandera==True:
+                    bandera=False
 
         # обновляем камеру относительно героя
         camera.update(hero)
@@ -184,7 +191,7 @@ def main():
         textsurface2 = myfont.render(f'{hero.mensaje}', False, (255, 255, 255))
         textsurface2.set_alpha(0)
 
-        hero.update(left, right, up, down, platforms, coins ,ed1 ,ed2 ,ed3 ,ed4, my_image ,textsurface2)
+        hero.update(left, right, up, down, platforms, coins ,ed1 ,ed2 ,ed3 ,ed4, my_image ,textsurface2, bandera)
         screen.blit(textsurface, (20, 20))
         screen.blit(textsurface2, (240,500))
         screen.blit(my_image,(200,460))
